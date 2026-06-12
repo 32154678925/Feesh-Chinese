@@ -9,32 +9,32 @@ import com.teamresourceful.resourcefulconfig.api.types.options.TranslatableValue
 import com.teamresourceful.resourcefulconfigkt.api.ObservableEntry
 import com.teamresourceful.resourcefulconfigkt.api.CategoryKt
 
-object WorldRendering : CategoryKt("World Rendering") {
+object WorldRendering : CategoryKt("世界渲染") {
     override val description: TranslatableValue
         get() = Literal(
-            "Features that modify the world and entities."
+            "修改世界和实体的功能。"
         )
 
     init {
         separator {
-            this.title = "${AQUA}${BOLD}Fishing hooks"
+            this.title = "${AQUA}${BOLD}鱼钩"
         }
     }
 
     var hideOtherPlayersFishingHooks by boolean(false) {
-        this.name = Translated("Hide other players' fishing hooks")
-        this.description = Translated("Hides fishing hooks that belong to other players.")
+        this.name = Translated("隐藏其他玩家的鱼钩")
+        this.description = Translated("隐藏属于其他玩家的鱼钩。")
     }
 
     init {
         separator {
-            this.title = "${AQUA}${BOLD}Highlight"
+            this.title = "${AQUA}${BOLD}高亮"
         }
     }
 
     var highlightSeaCreatures by ObservableEntry(boolean(false) {
-        this.name = Translated("Highlight sea creatures")
-        this.description = Translated("Applies glowing outline to selected sea creatures. Outline is colored depending on sea creature rarity. ${RED}Not visible through walls, but use at your own risk anyway!")
+        this.name = Translated("高亮海洋生物")
+        this.description = Translated("为选定的海洋生物应用发光轮廓。轮廓颜色取决于海洋生物的稀有度。${RED}不能透过墙壁看到，但请自行承担风险！")
     }
     ) { prev, new ->
         if (prev != new) {
@@ -45,8 +45,8 @@ object WorldRendering : CategoryKt("World Rendering") {
     var highlightSeaCreaturesList by ObservableEntry(select(
             *HighlightableSeaCreatureTypes.values().filter { it.isEnabledByDefault }.toTypedArray(),
         ) {
-            this.name = Translated("Select sea creatures")
-            this.description = Translated("Which sea creatures should have glowing outline applied to.")
+            this.name = Translated("选择海洋生物")
+            this.description = Translated("哪些海洋生物应应用发光轮廓。")
             this.searchTerms = HighlightableSeaCreatureTypes.values().map { it.displayName }.toList()
         }
     ) { prev, new ->
@@ -57,25 +57,25 @@ object WorldRendering : CategoryKt("World Rendering") {
 
     init {
         separator {
-            this.title = "${AQUA}${BOLD}Players"
+            this.title = "${AQUA}${BOLD}玩家"
         }
     }
 
     var hidePlayersNearBobber by boolean(false) {
-        this.name = Translated("Hide players near bobber")
-        this.description = Translated("Hides other players when your fishing rod is casted, if they are within the configured distance from your fishing hook.")
+        this.name = Translated("隐藏浮标附近的玩家")
+        this.description = Translated("当你的钓鱼竿抛出后，隐藏距离你鱼钩在设定范围内的其他玩家。")
     }
 
     var hidePlayersNearBobberDistance by int(5) {
-        this.name = Translated("Distance from bobber")
-        this.description = Translated("Maximum distance (blocks) from your fishing hook within which other players are hidden.")
+        this.name = Translated("距浮标距离")
+        this.description = Translated("距离你的鱼钩的最大距离（方块），在此范围内的其他玩家将被隐藏。")
         this.range = 1..10
         this.slider = true
     }
 
     var hidePlayersNearBobberUnhideDelay by ObservableEntry(int(0) {
-        this.name = Translated("Unhide delay")
-        this.description = Translated("Delay in seconds to keep players hidden after your bobber disappears.")
+        this.name = Translated("取消隐藏延迟")
+        this.description = Translated("你的浮标消失后，保持其他玩家隐藏的延迟秒数。")
         this.range = 0..5
         this.slider = true
     }) { prev, new ->
@@ -86,17 +86,17 @@ object WorldRendering : CategoryKt("World Rendering") {
 
     init {
         separator {
-            this.title = "${AQUA}${BOLD}World sounds"
+            this.title = "${AQUA}${BOLD}世界声音"
         }
     }
 
     var muteJadeDragon by boolean(false) {
-        this.name = Translated("Mute Jade Dragon")
-        this.description = Translated("Mutes Jade dragon sounds while you are in dragon's cave.")
+        this.name = Translated("静音翡翠龙")
+        this.description = Translated("当你在翡翠龙洞穴中时，静音翡翠龙的声音。")
     }
 
     var muteReindrakeGifts by boolean(false) {
-        this.name = Translated("Mute Reindrake gifts")
-        this.description = Translated("Mutes loud 'totem used' sounds while picking up gifts from a Reindrake.")
+        this.name = Translated("静音雷因德拉肯礼物")
+        this.description = Translated("静音从雷因德拉肯拾取礼物时响亮的\"图腾使用\"声音。")
     }
 }
